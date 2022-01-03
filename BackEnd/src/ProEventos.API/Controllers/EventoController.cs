@@ -40,7 +40,7 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public string Post(int id)
+        public string Put(int id)
         {
             return $"Teste Put com id = {id} ";
         }
