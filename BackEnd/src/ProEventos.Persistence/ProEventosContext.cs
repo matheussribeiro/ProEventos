@@ -3,6 +3,9 @@ using ProEventos.Domain;
 
 namespace ProEventos.Persistence
 {
+
+    // CONTEXTO DO BANCO
+    // AQUI FICA AS CLASSES QUE REPRESENTAM TABELAS
     public class ProEventosContext : DbContext
     {
         public ProEventosContext(DbContextOptions<ProEventosContext> options) : base(options){ }
