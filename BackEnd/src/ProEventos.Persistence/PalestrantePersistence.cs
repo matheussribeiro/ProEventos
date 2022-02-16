@@ -13,6 +13,7 @@ namespace ProEventos.Persistence
         public PalestrantePersistence(ProEventosContext context)
         {
             _context = context;
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
         }
 
