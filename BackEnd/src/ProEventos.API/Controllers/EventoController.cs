@@ -77,21 +77,55 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPost]
-        public string Post()
+        public async Task<IActionResult> Post(Evento model)
         {
-            return "Teste Post";
+            try
+            {
+                var evento = await eventoService.AddEvento(model);
+                if(evento == null) return BadRequest("Erro ao incluir evento.");
+
+                return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar recuperar eventos. Erro : {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]
-        public string Put(int id)
+        public async Task<IActionResult> Put(int id, Evento model)
         {
-            return $"Teste Put com id = {id} ";
+            try
+            {
+                var evento = await eventoService.UpdateEventos(id,model);
+                if(evento == null) return BadRequest("Erro ao atualizar evento.");
+                
+                return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar recuperar eventos. Erro : {ex.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return $"Teste Delete com id = {id} ";
+            try
+            {
+                return await eventoService.DeleteEventos(id) ?
+                    Ok("Deletado") :
+                    BadRequest("Evento não Deletado");
+            }
+            catch (Exception ex)
+            {
+                 return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar deletar eventos. Erro : {ex.Message}");
+            }
         }
     }
 
