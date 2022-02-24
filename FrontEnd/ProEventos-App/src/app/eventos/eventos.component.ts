@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Evento } from '../models/Evento';
 import { EventoService } from '../services/evento.service';
 
 @Component({
@@ -9,8 +10,8 @@ import { EventoService } from '../services/evento.service';
 })
 export class EventosComponent implements OnInit {
 
-  public eventos: any = [];
-  public eventosFilters: any = []
+  public eventos: Evento[] = [];
+  public eventosFilters: Evento[] = []
   marginImg = 2;
   isCollapsed = true;
   private _filterList = '';
@@ -26,7 +27,7 @@ export class EventosComponent implements OnInit {
     this.eventosFilters = this.filterList ? this.filterEvents(this.filterList) : this.eventos
   }
 
-  filterEvents(filterTo: string): any
+  public filterEvents(filterTo: string): Evento[]
   {
     filterTo = filterTo.toLowerCase();
     return this.eventos.filter(
@@ -37,14 +38,14 @@ export class EventosComponent implements OnInit {
 
   constructor(private eventoService : EventoService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getEventos();
   }
 
   public getEventos() : void {
     this.eventoService.getEventos().subscribe(
-      response => {
-        this.eventos = response;
+      (eventos: Evento[]) => {
+        this.eventos = eventos;
         this.eventosFilters = this.eventos
       },
       error => console.log(error)
