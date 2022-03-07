@@ -10,6 +10,9 @@ import { NavComponent } from './nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { EventoService } from './services/evento.service';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,10 @@ import { EventoService } from './services/evento.service';
     HttpClientModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
-    FormsModule
+    FormsModule,
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [EventoService],
   bootstrap: [AppComponent]
